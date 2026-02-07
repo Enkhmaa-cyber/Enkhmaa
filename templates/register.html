@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="mn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Бүртгэл</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="card">
+    <h1>Бүртгэл</h1>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="messages">
+        {% for category, msg in messages %}
+          <li class="{{ category }}">{{ msg }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <form method="post" novalidate>
+      <label>Овог
+        <input type="text" name="surname" value="{{ surname|default('') }}" required>
+      </label>
+      <label>Нэр
+        <input type="text" name="name" value="{{ name|default('') }}" required>
+      </label>
+      <label>Утас
+        <input type="tel" name="phone" value="{{ phone|default('') }}" pattern="^\+?\d{7,15}$" title="Жишээ: +97699112233 эсвэл 99112233" required>
+      </label>
+      <label>Имэйл
+        <input type="email" name="email" value="{{ email|default('') }}" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}" title="Жишээ: example@domain.com" placeholder="example@domain.com" required>
+      </label>
+      <p class="hint">Имэйл формат: example@domain.com</p>
+      <button type="submit" class="btn">Бүртгүүлэх</button>
+    </form>
+  </main>
+</body>
+</html>
